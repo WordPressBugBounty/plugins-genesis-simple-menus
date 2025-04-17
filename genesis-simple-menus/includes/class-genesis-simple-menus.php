@@ -60,7 +60,6 @@ final class Genesis_Simple_Menus {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-
 	}
 
 	/**
@@ -77,8 +76,7 @@ final class Genesis_Simple_Menus {
 		/**
 		 * Include and Instantiate.
 		 */
-		add_action( 'genesis_setup', array( $this, 'instantiate' ) );
-
+		add_action( 'after_setup_theme', array( $this, 'instantiate' ), 11 );
 	}
 
 
@@ -100,7 +98,6 @@ final class Genesis_Simple_Menus {
 			echo '<div class="notice notice-warning"><p>' . wp_kses_post( $message ) . '</p></div>';
 
 		}
-
 	}
 
 	/**
@@ -119,6 +116,10 @@ final class Genesis_Simple_Menus {
 	 */
 	public function instantiate() {
 
+		if ( ! function_exists( 'genesis_nav_menu_supported' ) ) {
+			return;
+		}
+
 		// Do nothing if secondary menu isn't supported.
 		if ( ! genesis_nav_menu_supported( 'secondary' ) ) {
 			return;
@@ -135,7 +136,5 @@ final class Genesis_Simple_Menus {
 		require_once GENESIS_SIMPLE_MENU_PLUGIN_DIR . '/includes/class-genesis-simple-menus-term.php';
 		$this->term = new Genesis_Simple_Menus_Term();
 		$this->term->init();
-
 	}
-
 }

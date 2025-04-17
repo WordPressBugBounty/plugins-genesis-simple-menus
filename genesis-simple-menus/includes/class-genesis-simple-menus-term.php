@@ -55,7 +55,6 @@ class Genesis_Simple_Menus_Term {
 
 		// Add fields to the term edit form.
 		add_action( 'admin_init', array( $this, 'add_edit_form' ) );
-
 	}
 
 	/**
@@ -94,7 +93,6 @@ class Genesis_Simple_Menus_Term {
 		foreach ( $this->taxonomies as $tax ) {
 			add_action( "{$tax}_edit_form", array( $this, 'term_edit_form' ), 9, 2 );
 		}
-
 	}
 
 	/**
@@ -102,15 +100,12 @@ class Genesis_Simple_Menus_Term {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  string $term     The term ID.
-	 * @param  string $taxonomy Current taxonomy.
+	 * @param  WP_Term $term     The term object.
+	 * @param  string  $taxonomy Current taxonomy.
 	 *
 	 * @return void
 	 */
-	public function term_edit_form( $term, $taxonomy ) {
-
+	public function term_edit_form( $term, $taxonomy ) { // phpcs:ignore -- $term is used in the included template.
 		require_once GENESIS_SIMPLE_MENU_PLUGIN_DIR . '/includes/views/term-edit-field.php';
-
 	}
-
 }
